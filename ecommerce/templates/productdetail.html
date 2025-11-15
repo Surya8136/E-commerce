@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+ <div class="about-box-main">
+        <div class="container">
+            <div class="row">
+				<div class="col-lg-6">
+                    <div class="banner-frame"> <img class="img-fluid" src="{{products.image.url}}" alt="" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="noo-sh-title-top text-dark">{{products.name}}</h2>
+                    <h4>Price:Rs {{products.price}}</h4>
+                    <h4>{% if products.stock > 0 %}Currently {{products.stock}} available {% else %}
+                        {% endif %}</h4>
+                    <h4><b>Short description</b></h4>
+                    <p>{{products.description}}</p>
+                    {% if user.is_superuser %}
+					<a class="btn hvr-hover" href="{% url 'shop:addstock' products.id %}">Add Stock</a>
+                    {% else %}
+                            {% if products.stock > 0 %}
+                    <a class="btn hvr-hover" href="{% url 'cart:addtocart' products.id %}">Add cart</a>
+                    {% else %}
+                    <h3><b>Out of Stock</b></h3>
+                    {% endif %}
+                    {% endif %}
+                </div>
+            </div></div></div>
+{% endblock %}

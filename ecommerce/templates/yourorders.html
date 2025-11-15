@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5 p-5 border w-50 shadow">
+      {% for i in order %}
+        <div class="container p-5 mt-5 border-2 ">
+            <h3>Order No: <b>{{i.order_id}}</b></h3>
+            <h3>Ordered Date:<b class="text-danger">{{i.ordered_date}}</b> </h3>
+            <h3>Order amount: {{i.amount}}</h3>
+            <h3>Delivery status: {{i.delivery_status}}</h3>
+            <hr>
+            {% for j in i.product.all %}
+                <div class="card mb-3" style="max-width: 100%; height:300px;">
+  <div class="row g-0">
+    <div class="col-md-4 border-2">
+      <img src="{{j.product.image.url}}" style="height:300px; width:500px;" class="img-fluid rounded-start " alt="...">
+    </div>
+    <div class="col-md-8 align-self-center text-center">
+      <div class="card-body">
+        <h5 class="card-title">{{j.product.name}}</h5>
+          <p class="card-text">{{j.product.price}}</p>
+          <p class="card-text">{{j.quantity}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+        </div>
+    {% endfor %}
+    {% endfor %}
+
+</div>
+</div>
+{% endblock %}
